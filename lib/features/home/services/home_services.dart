@@ -1,0 +1,27 @@
+import 'package:dio/dio.dart';
+import 'package:food_delivery/core/utils/app_constant.dart';
+import 'package:food_delivery/features/home/models/top_headlines_api_response.dart';
+import 'package:food_delivery/features/home/models/top_headlines_body.dart';
+
+class HomeServices {
+  final aDio = Dio();
+
+  Future<TopHeadlinesApiResponse> getTopHeadlines(TopHeadlinesBody body) async {
+    try {
+      aDio.options.baseUrl = AppConstant.baseUrl;
+      final headers = {'Authorization': 'Bearer ${AppConstant.apiKey}'};
+      final response = await aDio.get(
+        AppConstant.topHeadlines,
+        queryParameters: body.toMap(),
+        options: Options(headers: headers),
+      );
+      if (response.statusCode == 200) {
+        return TopHeadlinesApiResponse.fromMap(response.data);
+      } else {
+        throw Exception(response.statusMessage);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+}

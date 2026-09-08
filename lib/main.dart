@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:food_delivery/core/utils/route/app_router.dart';
 import 'package:food_delivery/core/utils/route/app_routes.dart';
 import 'package:food_delivery/core/utils/theme/app_theme.dart';
 
 import 'core/utils/app_constant.dart';
 
-void main() {
-
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
