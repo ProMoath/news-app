@@ -1,4 +1,4 @@
-name: food_delivery
+name: news_app
 description: "A new Flutter project."
 
 publish_to: 'none'
@@ -9,11 +9,13 @@ environment:
   sdk: ^3.11.4
 
 dependencies:
-  dio: ^5.7.0
+  cached_network_image: ^3.4.1
+  carousel_slider: ^5.1.2
+  dio: ^5.11.1
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.6
-  flutter_dotenv: ^5.1.0
+  flutter_bloc: ^9.1.1
+  flutter_dotenv: ^6.0.1
 
   cupertino_icons: ^1.0.8
 
@@ -35,7 +37,7 @@ flutter:
   # fonts:
   #   - family: Schyler
   #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-ReguPlar.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:food_delivery/core/utils/app_constant.dart';
-import 'package:food_delivery/features/home/models/top_headlines_api_response.dart';
-import 'package:food_delivery/features/home/models/top_headlines_body.dart';
+import 'package:news_app/core/utils/app_constant.dart';
+import 'package:news_app/features/home/models/top_headlines_api_response.dart';
+import 'package:news_app/features/home/models/top_headlines_body.dart';
 
 class HomeServices {
   final aDio = Dio();

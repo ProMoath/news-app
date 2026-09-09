@@ -1,4 +1,4 @@
-# food_delivery
+# news_app
 
 A new Flutter project.
 

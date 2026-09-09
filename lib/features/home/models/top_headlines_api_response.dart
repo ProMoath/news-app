@@ -15,7 +15,7 @@ class TopHeadlinesApiResponse {
   result.addAll({'status': status});
   result.addAll({'totalResults': totalResults});
   if (articles != null) {
-  result.addAll({'articles': articles!.map((x) => x?.toMap()).toList()});
+  result.addAll({'articles': articles!.map((x) => x.toMap()).toList()});
   }
 
   return result;

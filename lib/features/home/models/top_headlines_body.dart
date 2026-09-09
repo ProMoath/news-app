@@ -18,16 +18,21 @@ class TopHeadlinesBody {
     final resault = <String,dynamic>{};
 
     resault.addAll({'country': country});
-    if(category !=null)
+    if(category !=null) {
       resault.addAll({'category': category});
-    if(sources !=null)
+    }
+    if(sources !=null) {
       resault.addAll({'sources': sources});
-    if(q !=null)
+    }
+    if(q !=null) {
       resault.addAll({'q': q});
-    if(pageSize !=null)
+    }
+    if(pageSize !=null) {
       resault.addAll({'pageSize': pageSize});
-    if(page !=null)
+    }
+    if(page !=null) {
       resault.addAll({'page': page});
+    }
 
     return resault;
   }

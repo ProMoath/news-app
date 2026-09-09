@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../features/home/view/pages/home_page.dart';
 import 'app_routes.dart';
 
 class AppRouter {
