@@ -5,4 +5,5 @@ class AppColors {
   static const green = Colors.green;
   static const black = Colors.black;
   static const primary = Colors.blue;
+  static const grey = Colors.grey;
 }

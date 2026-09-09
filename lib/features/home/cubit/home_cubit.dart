@@ -12,11 +12,11 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> getTopHeadlines() async {
     emit(TopHeadlinesLoading());
     try {
-      final body = TopHeadlinesBody(
+      const body = TopHeadlinesBody(
         category: 'technology',
-        page :1,
-        pageSize :7
-        );
+        page: 1,
+        pageSize: 7,
+      );
       final response = await homeServices.getTopHeadlines(body);
       emit(TopHeadlinesLoaded(articles: response.articles));
     } catch (e) {
@@ -24,13 +24,14 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  // Future<void> getRecommendedNews() async {
-  //   emit(RecommendedNewLoading());
-  //   try {
-  //     final response = await TopHeadlinesApiResponse.getRecommendedNews();
-  //     emit(RecommendedNewLoaded(articales: response.articles));
-  //   } catch (e) {
-  //     emit(RecommendedNewError(errorMessage: e.toString()));
-  //   }
-  // }
+  Future<void> getRecommendedNews() async {
+    emit(RecommendedNewsLoading());
+    try {
+      const body = TopHeadlinesBody(page: 1, pageSize: 15);
+      final response = await homeServices.getTopHeadlines(body);
+      emit(RecommendedNewsLoaded(articles: response.articles));
+    } catch (e) {
+      emit(RecommendedNewsError(errorMessage: e.toString()));
+    }
+  }
 }

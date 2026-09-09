@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/features/home/cubit/home_cubit.dart';
+import 'package:news_app/features/home/view/widgets/recommendation_list_widget.dart';
 
 import '../widgets/custom_carousel_slider.dart';
 import '../widgets/title_headline_widget.dart';
@@ -14,52 +15,74 @@ class HomePage extends StatelessWidget {
       create: (context) {
         final homeCubit = HomeCubit();
         homeCubit.getTopHeadlines();
+        homeCubit.getRecommendedNews();
         return homeCubit;
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Home Page'),
-        ),
+        appBar: AppBar(title: const Text('Home Page')),
         body: Builder(
           builder: (context) {
             final homeCubit = BlocProvider.of<HomeCubit>(context);
             return SingleChildScrollView(
               child: Column(
-                children: [TitleHeadlineWidget(
-                  title: 'Breaking News',
-                  onTap: () {},
-                ),
-               SizedBox(
-                   height: 280,
-                   width: double.infinity,
-                   child: BlocBuilder<HomeCubit,HomeState>(
-                     bloc: homeCubit,
-                     buildWhen: (previous , current) => current is TopHeadlinesLoading || current is TopHeadlinesLoaded || current is TopHeadlinesError,
-                     builder: (context, state) {
-                       if(state is TopHeadlinesLoading) {
-                         return const Center(child: CircularProgressIndicator.adaptive());
-                       }else if(state is TopHeadlinesLoaded) {
+                children: [
+                  TitleHeadlineWidget(title: 'Breaking News', onTap: () {}),
+                  SizedBox(
+                    height: 280,
+                    width: double.infinity,
+                    child: BlocBuilder<HomeCubit, HomeState>(
+                      bloc: homeCubit,
+                      buildWhen: (previous, current) =>
+                          current is TopHeadlinesLoading ||
+                          current is TopHeadlinesLoaded ||
+                          current is TopHeadlinesError,
+                      builder: (context, state) {
+                        if (state is TopHeadlinesLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          );
+                        } else if (state is TopHeadlinesLoaded) {
+                          final articles = state.articles;
+                          return CustomCarouselSlider(articles: articles ?? []);
+                        } else if (state is TopHeadlinesError) {
+                          return Center(child: Text(state.errorMessage));
+                        } else {
+                          return const SizedBox.shrink();
+                        }
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  TitleHeadlineWidget(title: 'Recommendation', onTap: () {}),
+                  BlocBuilder<HomeCubit, HomeState>(
+                    bloc: homeCubit,
+                    buildWhen: (previous, current) =>
+                        current is RecommendedNewsLoaded ||
+                        current is RecommendedNewsLoading ||
+                        current is RecommendedNewsError,
+                    builder: (context, state) {
+                      if (state is RecommendedNewsLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        );
+                      } else if (state is RecommendedNewsLoaded) {
                         final articles = state.articles;
-                         return CustomCarouselSlider(articles: articles ?? [],);
-                       }else if(state is TopHeadlinesError) {
-                         return Center(child: Text(state.errorMessage));
-                       }else{
+                        return RecommendationListWidget(
+                          articles: articles ?? [],
+                        );
+                      } else if (state is RecommendedNewsError) {
+                        return Center(child: Text(state.errorMessage ?? ''));
+                      } else {
                         return const SizedBox.shrink();
-                       }
-                       
-                     }
-                   )),
-               const SizedBox(height: 16),
-                  TitleHeadlineWidget(
-                    title: 'Recommendation',
-                    onTap: () {},
+                      }
+                    },
                   ),
                 ],
-              )
-              ,);
-          }
+              ),
+            );
+          },
         ),
-        ),
+      ),
     );
   }
 }

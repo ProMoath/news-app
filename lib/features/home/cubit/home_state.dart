@@ -20,16 +20,16 @@ final class TopHeadlinesError extends HomeState {
   const TopHeadlinesError({required this.errorMessage});
 }
 
-final class RecommendedNewLoading extends HomeState {}
+final class RecommendedNewsLoading extends HomeState {}
 
-final class RecommendedNewLoaded extends HomeState {
+final class RecommendedNewsLoaded extends HomeState {
   final List<Article>? articles;
 
-  const RecommendedNewLoaded({required this.articles});
+  const RecommendedNewsLoaded({required this.articles});
 }
 
-final class RecommendedNewError extends HomeState {
+final class RecommendedNewsError extends HomeState {
   final String? errorMessage;
 
-  const RecommendedNewError({this.errorMessage});
+  const RecommendedNewsError({this.errorMessage});
 }

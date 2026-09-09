@@ -29,7 +29,7 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
             borderRadius: const BorderRadius.all(Radius.circular(16.0)),
             child: Stack(
               children: <Widget>[
-                CachedNetworkImage(imageUrl: article.urlToImage?? '', fit: BoxFit.cover, width: 1000.0),
+                CachedNetworkImage(imageUrl: article.urlToImage?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdQogZKb-T6BI-dJRKvEXik0uD8bapenlK3xYUqQU6wA&s=10', fit: BoxFit.cover, width: 1000.0),
                 Positioned(
                   bottom: 0.0,
                   left: 0.0,
